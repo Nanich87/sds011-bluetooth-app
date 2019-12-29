@@ -1,16 +1,22 @@
 ﻿namespace AirQualityMonitor
 {
+    using System.Linq;
     using Android.App;
+    using Android.Bluetooth;
     using Android.OS;
     using Android.Support.V7.App;
     using Android.Views;
+    using Android.Widget;
 
     [Activity(
         Label = "@string/app_name",
-        Theme = "@style/AppTheme.NoActionBar",
         MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
+        private ListView listDevices;
+
+        private ArrayAdapter<BluetoothDevice> deviceAdapter;
+
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.menu_main, menu);
@@ -34,10 +40,30 @@
 
             SetContentView(Resource.Layout.activity_main);
 
-            var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
-            if (toolbar != null)
+            listDevices = FindViewById<ListView>(Resource.Id.list_device);
+            if (listDevices != null)
             {
-                SetSupportActionBar(toolbar);
+                listDevices.ItemClick += OnDeviceClick;
+            }
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            if (GetSystemService(BluetoothService) is BluetoothManager bluetoothManager)
+            {
+                bluetoothManager.Adapter.Enable();
+
+                deviceAdapter = new ArrayAdapter<BluetoothDevice>(this, Android.Resource.Layout.SimpleListItem1, bluetoothManager.Adapter.BondedDevices.ToList());
+                listDevices.Adapter = deviceAdapter;
+            }
+        }
+
+        private void OnDeviceClick(object sender, AdapterView.ItemClickEventArgs e)
+        {
+            if (deviceAdapter.GetItem(e.Position) is BluetoothDevice device)
+            {
             }
         }
     }
