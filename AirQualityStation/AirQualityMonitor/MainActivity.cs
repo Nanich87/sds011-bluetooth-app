@@ -3,6 +3,7 @@
     using System.Linq;
     using Android.App;
     using Android.Bluetooth;
+    using Android.Content;
     using Android.OS;
     using Android.Support.V7.App;
     using Android.Views;
@@ -64,6 +65,18 @@
         {
             if (deviceAdapter.GetItem(e.Position) is BluetoothDevice device)
             {
+                var intent = new Intent(this, typeof(BluetoothService));
+                intent.SetAction(AirQualityMonitor.BluetoothService.ActionStartService);
+                intent.PutExtra(AirQualityMonitor.BluetoothService.KeyDevice, device);
+
+                if (Build.VERSION.SdkInt < BuildVersionCodes.O)
+                {
+                    StartService(intent);
+                }
+                else
+                {
+                    StartForegroundService(intent);
+                }
             }
         }
     }
