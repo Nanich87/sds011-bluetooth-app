@@ -1,5 +1,6 @@
 ﻿namespace AirQualityMonitor
 {
+    using System.Collections.Generic;
     using System.Linq;
     using Android.App;
     using Android.Bluetooth;
@@ -14,6 +15,9 @@
         MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
+        private const int RequestEnableBluetooth = 1;
+
+
         private ListView listDevices;
 
         private ArrayAdapter<BluetoothDevice> deviceAdapter;
@@ -21,18 +25,59 @@
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.menu_main, menu);
+
             return true;
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
-            int id = item.ItemId;
-            if (id == Resource.Id.action_settings)
+            switch (item.ItemId)
             {
-                return true;
-            }
+                case Resource.Id.action_stop_service:
+                    {
+                        var intent = new Intent(this, typeof(BluetoothService));
+                        intent.SetAction(AirQualityMonitor.BluetoothService.ActionStopService);
 
-            return base.OnOptionsItemSelected(item);
+                        if (Build.VERSION.SdkInt < BuildVersionCodes.O)
+                        {
+                            StartService(intent);
+                        }
+                        else
+                        {
+                            StartForegroundService(intent);
+                        }
+
+                        return true;
+                    }
+
+                default:
+                    {
+                        return base.OnOptionsItemSelected(item);
+                    }
+            }
+        }
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            switch (requestCode)
+            {
+                case RequestEnableBluetooth:
+                    {
+                        if (resultCode == Result.Ok && GetSystemService(BluetoothService) is BluetoothManager bluetoothManager)
+                        {
+                            PopulateDeviceList(bluetoothManager.Adapter.BondedDevices);
+                        }
+
+                        break;
+                    }
+
+                default:
+                    {
+                        base.OnActivityResult(requestCode, resultCode, data);
+
+                        break;
+                    }
+            }
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -54,10 +99,14 @@
 
             if (GetSystemService(BluetoothService) is BluetoothManager bluetoothManager)
             {
-                bluetoothManager.Adapter.Enable();
-
-                deviceAdapter = new ArrayAdapter<BluetoothDevice>(this, Android.Resource.Layout.SimpleListItem1, bluetoothManager.Adapter.BondedDevices.ToList());
-                listDevices.Adapter = deviceAdapter;
+                if (!bluetoothManager.Adapter.IsEnabled)
+                {
+                    StartActivityForResult(new Intent(BluetoothAdapter.ActionRequestEnable), RequestEnableBluetooth);
+                }
+                else
+                {
+                    PopulateDeviceList(bluetoothManager.Adapter.BondedDevices);
+                }
             }
         }
 
@@ -77,6 +126,15 @@
                 {
                     StartForegroundService(intent);
                 }
+            }
+        }
+
+        private void PopulateDeviceList(ICollection<BluetoothDevice> devices)
+        {
+            if (devices != null)
+            {
+                deviceAdapter = new ArrayAdapter<BluetoothDevice>(this, Android.Resource.Layout.SimpleListItem1, devices.ToArray());
+                listDevices.Adapter = deviceAdapter;
             }
         }
     }

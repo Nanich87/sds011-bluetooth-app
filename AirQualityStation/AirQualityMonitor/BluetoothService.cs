@@ -152,7 +152,7 @@
             {
                 AcquireWakeLock();
 
-                StartForeground(ServiceRunningNotificationId, CreateNotification(GetString(Resource.String.message_connecting_to_sensor)));
+                StartForeground(ServiceRunningNotificationId, CreateNotification(GetString(Resource.String.message_connecting_to_device)));
 
                 IsRunning = true;
 

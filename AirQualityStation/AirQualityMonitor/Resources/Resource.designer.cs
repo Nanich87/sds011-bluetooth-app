@@ -3090,7 +3090,7 @@ namespace AirQualityMonitor
 			public const int action_mode_close_button = 2131230742;
 			
 			// aapt resource value: 0x7F080017
-			public const int action_settings = 2131230743;
+			public const int action_stop_service = 2131230743;
 			
 			// aapt resource value: 0x7F080018
 			public const int action_text = 2131230744;
@@ -4068,7 +4068,7 @@ namespace AirQualityMonitor
 			public const int abc_toolbar_collapse_description = 2131623974;
 			
 			// aapt resource value: 0x7F0E0027
-			public const int action_settings = 2131623975;
+			public const int action_stop_service = 2131623975;
 			
 			// aapt resource value: 0x7F0E0029
 			public const int appbar_scrolling_view_behavior = 2131623977;
@@ -4104,7 +4104,7 @@ namespace AirQualityMonitor
 			public const int message_connected = 2131623986;
 			
 			// aapt resource value: 0x7F0E0033
-			public const int message_connecting_to_sensor = 2131623987;
+			public const int message_connecting_to_device = 2131623987;
 			
 			// aapt resource value: 0x7F0E0034
 			public const int message_disconnected = 2131623988;
