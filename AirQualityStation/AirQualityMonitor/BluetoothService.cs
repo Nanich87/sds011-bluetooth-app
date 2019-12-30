@@ -73,7 +73,7 @@
         {
             Binder = null;
 
-            Disconnect();
+            DisposeThreads();
 
             ReleaseWakeLock();
 
@@ -156,6 +156,21 @@
             }
         }
 
+        private void DisposeThreads()
+        {
+            if (connectThread != null)
+            {
+                connectThread.Cancel();
+                connectThread = null;
+            }
+
+            if (connectedThread != null)
+            {
+                connectedThread.Cancel();
+                connectedThread = null;
+            }
+        }
+
         private void StartService(Action action)
         {
             if (!IsRunning)
@@ -186,17 +201,7 @@
                 return;
             }
 
-            if (connectThread != null)
-            {
-                connectThread.Cancel();
-                connectThread = null;
-            }
-
-            if (connectedThread != null)
-            {
-                connectedThread.Cancel();
-                connectedThread = null;
-            }
+            DisposeThreads();
 
             BluetoothAdapter.DefaultAdapter.CancelDiscovery();
 
@@ -209,23 +214,6 @@
             connectThread.OnConnectionError += OnConnectionError;
 
             connectThread.Start();
-        }
-
-        private void Disconnect()
-        {
-            if (connectThread != null)
-            {
-                connectThread.Cancel();
-                connectThread = null;
-            }
-
-            if (connectedThread != null)
-            {
-                connectedThread.Cancel();
-                connectedThread = null;
-            }
-
-            Notify(CreateNotification(GetString(Resource.String.message_disconnected)));
         }
 
         private Notification CreateNotification(string contentText)
@@ -258,19 +246,7 @@
 
         private void OnConnected(BluetoothSocket socket, BluetoothDevice device)
         {
-            connectThread = null;
-
-            if (connectThread != null)
-            {
-                connectThread.Cancel();
-                connectThread = null;
-            }
-
-            if (connectedThread != null)
-            {
-                connectedThread.Cancel();
-                connectedThread = null;
-            }
+            DisposeThreads();
 
             connectedThread = new ConnectedThread(socket);
 

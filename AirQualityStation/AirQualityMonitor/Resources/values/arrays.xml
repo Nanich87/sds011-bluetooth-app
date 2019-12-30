@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <array name="temperature_color">
+  <array name="temperature_colors">
     <item>#FF0600ff</item>
     <item>#FF0500ff</item>
     <item>#FF0400ff</item>
@@ -92,5 +92,108 @@
     <item>#FFFF0CF0</item>
     <item>#FFFF0DF0</item>
     <item>#FFFF0EF0</item>
+  </array>
+  <array name="humidity_colors">
+    <item>#FFFF0000</item>
+    <item>#FFFF0500</item>
+    <item>#FFFF0A00</item>
+    <item>#FFFF0F00</item>
+    <item>#FFFF1400</item>
+    <item>#FFFF1900</item>
+    <item>#FFFF1E00</item>
+    <item>#FFFF2300</item>
+    <item>#FFFF2800</item>
+    <item>#FFFF2D00</item>
+    <item>#FFFF3300</item>
+    <item>#FFFF3800</item>
+    <item>#FFFF3D00</item>
+    <item>#FFFF4200</item>
+    <item>#FFFF4700</item>
+    <item>#FFFF4C00</item>
+    <item>#FFFF5100</item>
+    <item>#FFFF5600</item>
+    <item>#FFFF5B00</item>
+    <item>#FFFF6000</item>
+    <item>#FFFF6600</item>
+    <item>#FFFF6B00</item>
+    <item>#FFFF7000</item>
+    <item>#FFFF7500</item>
+    <item>#FFFF7A00</item>
+    <item>#FFFF7F00</item>
+    <item>#FFFF8400</item>
+    <item>#FFFF8900</item>
+    <item>#FFFF8E00</item>
+    <item>#FFFF9300</item>
+    <item>#FFFF9900</item>
+    <item>#FFFF9E00</item>
+    <item>#FFFFA300</item>
+    <item>#FFFFA800</item>
+    <item>#FFFFAD00</item>
+    <item>#FFFFB200</item>
+    <item>#FFFFB700</item>
+    <item>#FFFFBC00</item>
+    <item>#FFFFC100</item>
+    <item>#FFFFC600</item>
+    <item>#FFFFCC00</item>
+    <item>#FFFFD100</item>
+    <item>#FFFFD600</item>
+    <item>#FFFFDB00</item>
+    <item>#FFFFE000</item>
+    <item>#FFFFE500</item>
+    <item>#FFFFEA00</item>
+    <item>#FFFFEF00</item>
+    <item>#FFFFF400</item>
+    <item>#FFFFF900</item>
+    <item>#FFFFFF00</item>
+    <item>#FFF9FC05</item>
+    <item>#FFF4F90A</item>
+    <item>#FFEFF70F</item>
+    <item>#FFEAF414</item>
+    <item>#FFE5F219</item>
+    <item>#FFE0EF1E</item>
+    <item>#FFDBED23</item>
+    <item>#FFD6EA28</item>
+    <item>#FFD1E82D</item>
+    <item>#FFCCE533</item>
+    <item>#FFC6E338</item>
+    <item>#FFC1E03D</item>
+    <item>#FFBCDD42</item>
+    <item>#FFB7DB47</item>
+    <item>#FFB2D84C</item>
+    <item>#FFADD651</item>
+    <item>#FFA8D356</item>
+    <item>#FFA3D15B</item>
+    <item>#FF9ECE60</item>
+    <item>#FF99CC66</item>
+    <item>#FF93C96B</item>
+    <item>#FF8EC770</item>
+    <item>#FF89C475</item>
+    <item>#FF84C27A</item>
+    <item>#FF7FBF7F</item>
+    <item>#FF7ABC84</item>
+    <item>#FF75BA89</item>
+    <item>#FF70B78E</item>
+    <item>#FF6BB593</item>
+    <item>#FF66B299</item>
+    <item>#FF60B09E</item>
+    <item>#FF5BADA3</item>
+    <item>#FF56ABA8</item>
+    <item>#FF51A8AD</item>
+    <item>#FF4CA6B2</item>
+    <item>#FF47A3B7</item>
+    <item>#FF42A1BC</item>
+    <item>#FF3D9EC1</item>
+    <item>#FF389BC6</item>
+    <item>#FF3399CC</item>
+    <item>#FF2D96D1</item>
+    <item>#FF2894D6</item>
+    <item>#FF2391DB</item>
+    <item>#FF1E8FE0</item>
+    <item>#FF198CE5</item>
+    <item>#FF148AEA</item>
+    <item>#FF0F87EF</item>
+    <item>#FF0A85F4</item>
+    <item>#FF0582F9</item>
+    <item>#FF0080FF</item>
   </array>
 </resources>

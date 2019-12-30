@@ -136,7 +136,10 @@ namespace AirQualityMonitor
 		{
 			
 			// aapt resource value: 0x7F030000
-			public const int temperature_color = 2130903040;
+			public const int humidity_colors = 2130903040;
+			
+			// aapt resource value: 0x7F030001
+			public const int temperature_colors = 2130903041;
 			
 			static Array()
 			{
