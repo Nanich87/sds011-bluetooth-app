@@ -2,9 +2,12 @@
 {
     using Android.App;
     using Android.Content;
+    using Android.Content.Res;
+    using Android.Graphics;
     using Android.OS;
     using Android.Support.V7.App;
     using Android.Widget;
+    using System.Collections.Generic;
 
     [Activity(
         Label = "@string/sensor_title")]
@@ -42,20 +45,30 @@
             private readonly TextView textTemperature;
             private readonly TextView textHumidity;
 
+            private readonly TypedArray temperatureColors;
+
             public SensorReceiver(SensorActivity activity)
             {
                 textPM25 = activity.FindViewById<TextView>(Resource.Id.text_pm25);
                 textPM10 = activity.FindViewById<TextView>(Resource.Id.text_pm10);
                 textTemperature = activity.FindViewById<TextView>(Resource.Id.text_temperature);
                 textHumidity = activity.FindViewById<TextView>(Resource.Id.text_humidity);
+
+                temperatureColors = activity.Resources.ObtainTypedArray(Resource.Array.temperature_color);
             }
 
             public override void OnReceive(Context context, Intent intent)
             {
+                var temperature = intent.GetDoubleExtra(AirQualityMonitor.BluetoothService.KeyTemperature, 0.0);
+                var temperatureColorIndex = (int)temperature < 0 ? 0 : (int)temperature > 90 ? 90 : (int)temperature;
+
                 textPM25.Post(() => textPM25.Text = string.Format("{0:F1}", intent.GetDoubleExtra(AirQualityMonitor.BluetoothService.KeyPM25, 0.0)));
                 textPM10.Post(() => textPM10.Text = string.Format("{0:F1}", intent.GetDoubleExtra(AirQualityMonitor.BluetoothService.KeyPM10, 0.0)));
-                textTemperature.Post(() => textTemperature.Text = string.Format("{0:F1}", intent.GetDoubleExtra(AirQualityMonitor.BluetoothService.KeyTemperature, 0.0)));
-                textHumidity.Post(() => textHumidity.Text = string.Format("{0:F0}", intent.GetDoubleExtra(AirQualityMonitor.BluetoothService.KeyHumidity, 0.0)));
+
+                textTemperature.Post(() => textTemperature.Text = string.Format("{0:F1}°C", temperature));
+                textTemperature.SetBackgroundColor(temperatureColors.GetColor(temperatureColorIndex, 0));
+
+                textHumidity.Post(() => textHumidity.Text = string.Format("{0:F0}%", intent.GetDoubleExtra(AirQualityMonitor.BluetoothService.KeyHumidity, 0.0)));
             }
         }
     }

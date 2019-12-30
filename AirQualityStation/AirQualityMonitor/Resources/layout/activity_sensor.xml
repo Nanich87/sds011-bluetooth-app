@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <android.support.v7.widget.GridLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:grid="http://schemas.android.com/apk/res-auto"
@@ -18,7 +18,9 @@
         grid:layout_rowWeight="1"
         grid:layout_gravity="fill"
         android:gravity="center"
-        android:background="#FF33B5E5" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF"
+        android:background="#3D3D3D" />
     <TextView
         android:id="@+id/text_pm10"
         android:layout_width="0dp"
@@ -27,7 +29,9 @@
         grid:layout_rowWeight="1"
         grid:layout_gravity="fill"
         android:gravity="center"
-        android:background="#FF33B5E5" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF"
+        android:background="#3D3D3D" />
     <TextView
         android:id="@+id/text_temperature"
         android:layout_width="0dp"
@@ -36,7 +40,9 @@
         grid:layout_rowWeight="1"
         grid:layout_gravity="fill"
         android:gravity="center"
-        android:background="#FF33B5E5" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF"
+        android:background="#3D3D3D" />
     <TextView
         android:id="@+id/text_humidity"
         android:layout_width="0dp"
@@ -45,5 +51,7 @@
         grid:layout_rowWeight="1"
         grid:layout_gravity="fill"
         android:gravity="center"
-        android:background="#FF33B5E5" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF"
+        android:background="#3D3D3D" />
 </android.support.v7.widget.GridLayout>
