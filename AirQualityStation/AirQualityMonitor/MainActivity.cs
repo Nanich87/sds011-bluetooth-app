@@ -109,6 +109,7 @@
             if (deviceAdapter.GetItem(e.Position) is BluetoothDevice device)
             {
                 StartBluetoothService(device);
+                StartActivity(typeof(SensorActivity));
             }
         }
 

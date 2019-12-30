@@ -26,6 +26,16 @@
 
         public const string ActionStopService = "BluetoothService_ActionStopService";
 
+        public const string ActionDataReceived = "BluetoothService_ActionDataReceived";
+
+        public const string KeyPM25 = "pm25";
+
+        public const string KeyPM10 = "pm10";
+
+        public const string KeyTemperature = "temperature";
+
+        public const string KeyHumidity = "humidity";
+
 
         private const int ServiceRunningNotificationId = 1;
 
@@ -235,6 +245,7 @@
               .SetContentTitle(GetString(Resource.String.channel_description))
               .SetSmallIcon(Android.Resource.Drawable.StatSysDataBluetooth)
               .SetContentText(contentText)
+              .SetVisibility((int)NotificationVisibility.Public)
               .Build();
         }
 
@@ -337,6 +348,14 @@
                 var h = double.Parse(fields[3], NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture);
 
                 Notify(CreateNotification(string.Format("PM2.5={0:F1} PM10={1:F1} T={2:F1}°C H={3:F0}%", pm25, pm10, t, h)));
+
+                var intent = new Intent(ActionDataReceived);
+                intent.PutExtra(KeyPM25, pm25);
+                intent.PutExtra(KeyPM10, pm10);
+                intent.PutExtra(KeyTemperature, t);
+                intent.PutExtra(KeyHumidity, h);
+
+                SendBroadcast(intent);
             }
         }
 
