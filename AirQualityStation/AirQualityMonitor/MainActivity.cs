@@ -22,6 +22,7 @@
 
         private ArrayAdapter<BluetoothDevice> deviceAdapter;
 
+
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.menu_main, menu);
@@ -35,17 +36,7 @@
             {
                 case Resource.Id.action_stop_service:
                     {
-                        var intent = new Intent(this, typeof(BluetoothService));
-                        intent.SetAction(AirQualityMonitor.BluetoothService.ActionStopService);
-
-                        if (Build.VERSION.SdkInt < BuildVersionCodes.O)
-                        {
-                            StartService(intent);
-                        }
-                        else
-                        {
-                            StartForegroundService(intent);
-                        }
+                        StopBluetoothService();
 
                         return true;
                     }
@@ -56,6 +47,7 @@
                     }
             }
         }
+
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
@@ -79,6 +71,7 @@
                     }
             }
         }
+
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -110,14 +103,33 @@
             }
         }
 
+
         private void OnDeviceClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             if (deviceAdapter.GetItem(e.Position) is BluetoothDevice device)
             {
-                var intent = new Intent(this, typeof(BluetoothService));
-                intent.SetAction(AirQualityMonitor.BluetoothService.ActionStartService);
-                intent.PutExtra(AirQualityMonitor.BluetoothService.KeyDevice, device);
+                StartBluetoothService(device);
+            }
+        }
 
+
+        private void PopulateDeviceList(ICollection<BluetoothDevice> devices)
+        {
+            if (devices != null)
+            {
+                deviceAdapter = new ArrayAdapter<BluetoothDevice>(this, Android.Resource.Layout.SimpleListItem1, devices.ToArray());
+                listDevices.Adapter = deviceAdapter;
+            }
+        }
+
+        private void StartBluetoothService(BluetoothDevice device)
+        {
+            var intent = new Intent(this, typeof(BluetoothService));
+            intent.SetAction(AirQualityMonitor.BluetoothService.ActionStartService);
+            intent.PutExtra(AirQualityMonitor.BluetoothService.KeyDevice, device);
+
+            try
+            {
                 if (Build.VERSION.SdkInt < BuildVersionCodes.O)
                 {
                     StartService(intent);
@@ -127,14 +139,22 @@
                     StartForegroundService(intent);
                 }
             }
+            catch (Java.Lang.SecurityException)
+            {
+            }
         }
 
-        private void PopulateDeviceList(ICollection<BluetoothDevice> devices)
+        private void StopBluetoothService()
         {
-            if (devices != null)
+            var intent = new Intent(this, typeof(BluetoothService));
+            intent.SetAction(AirQualityMonitor.BluetoothService.ActionStopService);
+
+            try
             {
-                deviceAdapter = new ArrayAdapter<BluetoothDevice>(this, Android.Resource.Layout.SimpleListItem1, devices.ToArray());
-                listDevices.Adapter = deviceAdapter;
+                StartService(intent);
+            }
+            catch (Java.Lang.SecurityException)
+            {
             }
         }
     }
