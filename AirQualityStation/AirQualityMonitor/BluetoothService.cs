@@ -246,6 +246,8 @@
 
         private void OnConnected(BluetoothSocket socket, BluetoothDevice device)
         {
+            connectThread = null;
+
             DisposeThreads();
 
             connectedThread = new ConnectedThread(socket);
