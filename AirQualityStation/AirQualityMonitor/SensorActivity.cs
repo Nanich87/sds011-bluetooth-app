@@ -4,12 +4,11 @@
     using Android.Content;
     using Android.Content.Res;
     using Android.OS;
-    using Android.Support.V7.App;
     using Android.Widget;
 
     [Activity(
         Label = "@string/sensor_title")]
-    public class SensorActivity : AppCompatActivity
+    public class SensorActivity : BaseActivity
     {
         private BroadcastReceiver sensorReceiver;
 
@@ -62,14 +61,14 @@
                 textPM25.Post(() => textPM25.Text = string.Format("{0:F1}", intent.GetDoubleExtra(AirQualityMonitor.BluetoothService.KeyPM25, 0.0)));
                 textPM10.Post(() => textPM10.Text = string.Format("{0:F1}", intent.GetDoubleExtra(AirQualityMonitor.BluetoothService.KeyPM10, 0.0)));
 
-                var temperature = intent.GetDoubleExtra(AirQualityMonitor.BluetoothService.KeyTemperature, 0.0);
-                var temperatureColorIndex = (int)temperature < 0 ? 0 : (int)temperature > 90 ? 90 : (int)temperature;
+                double temperature = intent.GetDoubleExtra(AirQualityMonitor.BluetoothService.KeyTemperature, 0.0);
+                int temperatureColorIndex = (int)temperature < 0 ? 0 : (int)temperature > 90 ? 90 : (int)temperature;
 
                 textTemperature.Text = string.Format("{0:F1}°C", temperature);
                 textTemperature.SetBackgroundColor(temperatureColors.GetColor(temperatureColorIndex, 0));
 
-                var humidity = intent.GetDoubleExtra(AirQualityMonitor.BluetoothService.KeyHumidity, 0.0);
-                var humidityColorIndex = (int)humidity < 0 ? 0 : (int)humidity > 100 ? 100 : (int)humidity;
+                double humidity = intent.GetDoubleExtra(AirQualityMonitor.BluetoothService.KeyHumidity, 0.0);
+                int humidityColorIndex = (int)humidity < 0 ? 0 : (int)humidity > 100 ? 100 : (int)humidity;
 
                 textHumidity.Text = string.Format("{0:F0}%", humidity);
                 textHumidity.SetBackgroundColor(humidityColors.GetColor(humidityColorIndex, 0));

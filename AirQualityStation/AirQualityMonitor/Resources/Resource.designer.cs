@@ -4192,13 +4192,13 @@ namespace AirQualityMonitor
 			public const int hide_bottom_view_on_scroll_behavior = 2131689521;
 			
 			// aapt resource value: 0x7F0F0032
-			public const int message_connected = 2131689522;
+			public const int main_title = 2131689522;
 			
 			// aapt resource value: 0x7F0F0033
-			public const int message_connecting_to_device = 2131689523;
+			public const int message_connected = 2131689523;
 			
 			// aapt resource value: 0x7F0F0034
-			public const int message_disconnected = 2131689524;
+			public const int message_connecting_to_device = 2131689524;
 			
 			// aapt resource value: 0x7F0F0035
 			public const int mtrl_chip_close_icon_content_description = 2131689525;

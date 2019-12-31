@@ -6,14 +6,12 @@
     using Android.Bluetooth;
     using Android.Content;
     using Android.OS;
-    using Android.Support.V7.App;
-    using Android.Views;
     using Android.Widget;
 
     [Activity(
-        Label = "@string/app_name",
+        Label = "@string/main_title",
         MainLauncher = true)]
-    public class MainActivity : AppCompatActivity
+    public class MainActivity : BaseActivity
     {
         private const int RequestEnableBluetooth = 1;
 
@@ -21,32 +19,6 @@
         private ListView listDevices;
 
         private ArrayAdapter<BluetoothDevice> deviceAdapter;
-
-
-        public override bool OnCreateOptionsMenu(IMenu menu)
-        {
-            MenuInflater.Inflate(Resource.Menu.menu_main, menu);
-
-            return true;
-        }
-
-        public override bool OnOptionsItemSelected(IMenuItem item)
-        {
-            switch (item.ItemId)
-            {
-                case Resource.Id.action_stop_service:
-                    {
-                        StopBluetoothService();
-
-                        return true;
-                    }
-
-                default:
-                    {
-                        return base.OnOptionsItemSelected(item);
-                    }
-            }
-        }
 
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
@@ -139,20 +111,6 @@
                 {
                     StartForegroundService(intent);
                 }
-            }
-            catch (Java.Lang.SecurityException)
-            {
-            }
-        }
-
-        private void StopBluetoothService()
-        {
-            var intent = new Intent(this, typeof(BluetoothService));
-            intent.SetAction(AirQualityMonitor.BluetoothService.ActionStopService);
-
-            try
-            {
-                StartService(intent);
             }
             catch (Java.Lang.SecurityException)
             {
