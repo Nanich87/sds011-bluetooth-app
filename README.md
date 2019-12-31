@@ -1,5 +1,4 @@
 # Bluetooth App (Xamarin.Android) for [Air Quality Station](https://github.com/Nanich87/diy-sds011-air-quality-station)
 
-![Main Activity](./Screenshots/Devices.png =250x250)
+<img src="./Screenshots/Devices.png" width="200"> <img src="./Screenshots/Sensor.png" width="200">
 
-![Sensor Activity](./Screenshots/Sensor.png | width=100)
