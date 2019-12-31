@@ -1,8 +1,10 @@
 ﻿namespace AirQualityMonitor
 {
+    using AirQualityMonitor.Extensions;
     using Android.App;
     using Android.Content;
     using Android.Content.Res;
+    using Android.Graphics;
     using Android.OS;
     using Android.Widget;
 
@@ -17,6 +19,9 @@
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.activity_sensor);
+
+            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+            SupportActionBar.SetDisplayShowHomeEnabled(true);
 
             sensorReceiver = new SensorReceiver(this);
         }
@@ -58,8 +63,23 @@
 
             public override void OnReceive(Context context, Intent intent)
             {
-                textPM25.Post(() => textPM25.Text = string.Format("{0:F1}", intent.GetDoubleExtra(AirQualityMonitor.BluetoothService.KeyPM25, 0.0)));
-                textPM10.Post(() => textPM10.Text = string.Format("{0:F1}", intent.GetDoubleExtra(AirQualityMonitor.BluetoothService.KeyPM10, 0.0)));
+                double pm25 = intent.GetDoubleExtra(AirQualityMonitor.BluetoothService.KeyPM25, 0.0);
+                int aqi25 = AQIExt.GetAQI25(pm25);
+                Color aqi25Color = AQIExt.GetColor(aqi25);
+                Color aqi25TextColor = AQIExt.GetTextColor(aqi25Color);
+
+                textPM25.Text = string.Format("{0:F1}μg/m³{1}{2}", pm25, System.Environment.NewLine, aqi25);
+                textPM25.SetBackgroundColor(aqi25Color);
+                textPM25.SetTextColor(aqi25TextColor);
+
+                double pm10 = intent.GetDoubleExtra(AirQualityMonitor.BluetoothService.KeyPM10, 0.0);
+                int aqi10 = AQIExt.GetAQI25(pm10);
+                Color aqi10Color = AQIExt.GetColor(aqi10);
+                Color aqi10TextColor = AQIExt.GetTextColor(aqi10Color);
+
+                textPM10.Text = string.Format("{0:F1}μg/m³{1}{2}", pm10, System.Environment.NewLine, aqi10);
+                textPM10.SetBackgroundColor(aqi10Color);
+                textPM10.SetTextColor(aqi10TextColor);
 
                 double temperature = intent.GetDoubleExtra(AirQualityMonitor.BluetoothService.KeyTemperature, 0.0);
                 int temperatureColorIndex = (int)temperature < 0 ? 0 : (int)temperature > 90 ? 90 : (int)temperature;

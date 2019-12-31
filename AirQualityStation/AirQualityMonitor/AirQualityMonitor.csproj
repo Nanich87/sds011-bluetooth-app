@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="BaseActivity.cs" />
     <Compile Include="BluetoothService.cs" />
+    <Compile Include="Extensions\AQIExt.cs" />
     <Compile Include="Extensions\ByteExt.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
