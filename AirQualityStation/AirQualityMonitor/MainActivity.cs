@@ -1,4 +1,6 @@
-﻿namespace AirQualityMonitor
+﻿// Copyright (c) GNNMobile.eu. All rights reserved.
+
+namespace AirQualityMonitor
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -15,11 +17,9 @@
     {
         private const int RequestEnableBluetooth = 1;
 
-
         private ListView listDevices;
 
         private ArrayAdapter<BluetoothDevice> deviceAdapter;
-
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
@@ -43,7 +43,6 @@
                     }
             }
         }
-
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -75,7 +74,6 @@
             }
         }
 
-
         private void OnDeviceClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             if (deviceAdapter.GetItem(e.Position) is BluetoothDevice device)
@@ -84,7 +82,6 @@
                 StartActivity(typeof(SensorActivity));
             }
         }
-
 
         private void PopulateDeviceList(ICollection<BluetoothDevice> devices)
         {

@@ -1,4 +1,6 @@
-﻿namespace AirQualityMonitor
+﻿// Copyright (c) GNNMobile.eu. All rights reserved.
+
+namespace AirQualityMonitor
 {
     using AirQualityMonitor.Extensions;
     using Android.App;

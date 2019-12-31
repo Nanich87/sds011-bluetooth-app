@@ -1,8 +1,10 @@
-﻿namespace AirQualityMonitor.Extensions
+﻿// Copyright (c) GNNMobile.eu. All rights reserved.
+
+namespace AirQualityMonitor.Extensions
 {
     using Android.Graphics;
 
-    public static class AQIExt
+    internal static class AQIExt
     {
         public static Color GetColor(int aqi)
         {
@@ -68,31 +70,31 @@
 
             if (pm25 >= pm1 && pm25 <= pm2)
             {
-                aqiPM25 = ((aqi2 - aqi1) / (pm2 - pm1)) * (pm25 - pm1) + aqi1;
+                aqiPM25 = ((aqi2 - aqi1) / (pm2 - pm1) * (pm25 - pm1)) + aqi1;
             }
             else if (pm25 >= pm2 && pm25 <= pm3)
             {
-                aqiPM25 = ((aqi3 - aqi2) / (pm3 - pm2)) * (pm25 - pm2) + aqi2;
+                aqiPM25 = ((aqi3 - aqi2) / (pm3 - pm2) * (pm25 - pm2)) + aqi2;
             }
             else if (pm25 >= pm3 && pm25 <= pm4)
             {
-                aqiPM25 = ((aqi4 - aqi3) / (pm4 - pm3)) * (pm25 - pm3) + aqi3;
+                aqiPM25 = ((aqi4 - aqi3) / (pm4 - pm3) * (pm25 - pm3)) + aqi3;
             }
             else if (pm25 >= pm4 && pm25 <= pm5)
             {
-                aqiPM25 = ((aqi5 - aqi4) / (pm5 - pm4)) * (pm25 - pm4) + aqi4;
+                aqiPM25 = ((aqi5 - aqi4) / (pm5 - pm4) * (pm25 - pm4)) + aqi4;
             }
             else if (pm25 >= pm5 && pm25 <= pm6)
             {
-                aqiPM25 = ((aqi6 - aqi5) / (pm6 - pm5)) * (pm25 - pm5) + aqi5;
+                aqiPM25 = ((aqi6 - aqi5) / (pm6 - pm5) * (pm25 - pm5)) + aqi5;
             }
             else if (pm25 >= pm6 && pm25 <= pm7)
             {
-                aqiPM25 = ((aqi7 - aqi6) / (pm7 - pm6)) * (pm25 - pm6) + aqi6;
+                aqiPM25 = ((aqi7 - aqi6) / (pm7 - pm6) * (pm25 - pm6)) + aqi6;
             }
             else if (pm25 >= pm7 && pm25 <= pm8)
             {
-                aqiPM25 = ((aqi8 - aqi7) / (pm8 - pm7)) * (pm25 - pm7) + aqi7;
+                aqiPM25 = ((aqi8 - aqi7) / (pm8 - pm7) * (pm25 - pm7)) + aqi7;
             }
 
             return (int)aqiPM25;
@@ -122,31 +124,31 @@
 
             if (pm10 >= pm1 && pm10 <= pm2)
             {
-                aqiPM10 = ((aqi2 - aqi1) / (pm2 - pm1)) * (pm10 - pm1) + aqi1;
+                aqiPM10 = ((aqi2 - aqi1) / (pm2 - pm1) * (pm10 - pm1)) + aqi1;
             }
             else if (pm10 >= pm2 && pm10 <= pm3)
             {
-                aqiPM10 = ((aqi3 - aqi2) / (pm3 - pm2)) * (pm10 - pm2) + aqi2;
+                aqiPM10 = ((aqi3 - aqi2) / (pm3 - pm2) * (pm10 - pm2)) + aqi2;
             }
             else if (pm10 >= pm3 && pm10 <= pm4)
             {
-                aqiPM10 = ((aqi4 - aqi3) / (pm4 - pm3)) * (pm10 - pm3) + aqi3;
+                aqiPM10 = ((aqi4 - aqi3) / (pm4 - pm3) * (pm10 - pm3)) + aqi3;
             }
             else if (pm10 >= pm4 && pm10 <= pm5)
             {
-                aqiPM10 = ((aqi5 - aqi4) / (pm5 - pm4)) * (pm10 - pm4) + aqi4;
+                aqiPM10 = ((aqi5 - aqi4) / (pm5 - pm4) * (pm10 - pm4)) + aqi4;
             }
             else if (pm10 >= pm5 && pm10 <= pm6)
             {
-                aqiPM10 = ((aqi6 - aqi5) / (pm6 - pm5)) * (pm10 - pm5) + aqi5;
+                aqiPM10 = ((aqi6 - aqi5) / (pm6 - pm5) * (pm10 - pm5)) + aqi5;
             }
             else if (pm10 >= pm6 && pm10 <= pm7)
             {
-                aqiPM10 = ((aqi7 - aqi6) / (pm7 - pm6)) * (pm10 - pm6) + aqi6;
+                aqiPM10 = ((aqi7 - aqi6) / (pm7 - pm6) * (pm10 - pm6)) + aqi6;
             }
             else if (pm10 >= pm7 && pm10 <= pm8)
             {
-                aqiPM10 = ((aqi8 - aqi7) / (pm8 - pm7)) * (pm10 - pm7) + aqi7;
+                aqiPM10 = ((aqi8 - aqi7) / (pm8 - pm7) * (pm10 - pm7)) + aqi7;
             }
 
             return (int)aqiPM10;

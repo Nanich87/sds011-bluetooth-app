@@ -1,4 +1,6 @@
-﻿namespace AirQualityMonitor
+﻿// Copyright (c) GNNMobile.eu. All rights reserved.
+
+namespace AirQualityMonitor
 {
     using Android.Content;
     using Android.OS;
@@ -39,12 +41,10 @@
             }
         }
 
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
         }
-
 
         private void StopBluetoothService()
         {

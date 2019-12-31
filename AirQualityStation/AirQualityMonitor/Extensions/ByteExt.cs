@@ -1,4 +1,6 @@
-﻿namespace AirQualityMonitor.Extensions
+﻿// Copyright (c) GNNMobile.eu. All rights reserved.
+
+namespace AirQualityMonitor.Extensions
 {
     using System;
 

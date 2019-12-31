@@ -1,4 +1,6 @@
-﻿namespace AirQualityMonitor
+﻿// Copyright (c) GNNMobile.eu. All rights reserved.
+
+namespace AirQualityMonitor
 {
     using System;
     using System.Collections.Generic;
@@ -36,13 +38,11 @@
 
         public const string KeyHumidity = "humidity";
 
-
         private const int ServiceRunningNotificationId = 1;
 
         private const string ServiceNotificationChannelId = "BluetoothService_NotificationChannelId";
 
         private const int ServiceReconnectDelay = 5000;
-
 
         private PowerManager.WakeLock wakeLock;
 
@@ -54,11 +54,9 @@
 
         private List<byte> buffer;
 
-
         public static bool IsRunning { get; private set; }
 
         public IBinder Binder { get; private set; }
-
 
         public override void OnCreate()
         {
@@ -117,7 +115,6 @@
 
             return StartCommandResult.RedeliverIntent;
         }
-
 
         private void CreateNotificationChannel()
         {
@@ -243,7 +240,6 @@
             notificationManager.Notify(ServiceRunningNotificationId, notification);
         }
 
-
         private void OnConnected(BluetoothSocket socket, BluetoothDevice device)
         {
             connectThread = null;
@@ -351,11 +347,9 @@
     {
         private const string SppUuid = "00001101-0000-1000-8000-00805f9b34fb";
 
-
         private readonly BluetoothDevice device;
 
         private readonly BluetoothSocket socket;
-
 
         public ConnectThread(BluetoothDevice bluetoothDevice)
         {
@@ -374,16 +368,13 @@
             socket = tempSocket;
         }
 
-
         public delegate void ConnectedEventHandler(BluetoothSocket socket, BluetoothDevice device);
 
         public delegate void ConnectionErrorEventHandler(Exception ex);
 
-
         public event ConnectedEventHandler OnConnected;
 
         public event ConnectionErrorEventHandler OnConnectionError;
-
 
         public override void Run()
         {
@@ -417,13 +408,11 @@
     {
         private const int Buffer = 2048;
 
+        private readonly BluetoothSocket socket;
 
-        private BluetoothSocket socket;
-
-        private Stream inputStream;
+        private readonly Stream inputStream;
 
         private volatile bool stopping;
-
 
         public ConnectedThread(BluetoothSocket bluetoothSocket)
         {
@@ -443,16 +432,13 @@
             inputStream = tmpIn;
         }
 
-
         public delegate void DataReceivedEventHandler(byte[] data);
 
         public delegate void DataErrorEventHandler(Exception ex);
 
-
         public event DataReceivedEventHandler OnDataReceived;
 
         public event DataErrorEventHandler OnDataError;
-
 
         public override void Run()
         {
