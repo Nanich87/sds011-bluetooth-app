@@ -44,6 +44,8 @@ namespace AirQualityMonitor
 
         private class SensorReceiver : BroadcastReceiver
         {
+            private readonly ProgressBar progress;
+
             private readonly TextView textPM25;
             private readonly TextView textPM10;
             private readonly TextView textTemperature;
@@ -54,6 +56,8 @@ namespace AirQualityMonitor
 
             public SensorReceiver(SensorActivity activity)
             {
+                progress = activity.FindViewById<ProgressBar>(Resource.Id.progressBar);
+
                 textPM25 = activity.FindViewById<TextView>(Resource.Id.text_pm25);
                 textPM10 = activity.FindViewById<TextView>(Resource.Id.text_pm10);
                 textTemperature = activity.FindViewById<TextView>(Resource.Id.text_temperature);
@@ -65,6 +69,11 @@ namespace AirQualityMonitor
 
             public override void OnReceive(Context context, Intent intent)
             {
+                if (progress.Visibility == Android.Views.ViewStates.Visible)
+                {
+                    progress.Visibility = Android.Views.ViewStates.Gone;
+                }
+
                 double pm25 = intent.GetDoubleExtra(AirQualityMonitor.BluetoothService.KeyPM25, 0.0);
                 int aqi25 = AQIExt.GetAQI25(pm25);
                 Color aqi25Color = AQIExt.GetColor(aqi25);
